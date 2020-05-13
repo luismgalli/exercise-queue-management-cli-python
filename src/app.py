@@ -2,19 +2,24 @@ import json
 from DataStructures import Queue
 from sms import send
 
+lista = ['pedro', 'luis', 'maria']
 # there queue has to be declared globally (outside any other function)
 # that way all methods have access to it
-queue = Queue(mode="FIFO")
+queue = Queue(mode="FIFO",current_queue= lista)
     
 def print_queue():
     # you must print on the console the entire queue list
     print("Printing the entire list...")
     print(queue.get_queue())
 
-def add():
-    pass
+def add(nombre):
+    queue.enqueue(nombre)
+    x = queue.size() - 1
+    send(nombre + ' tienes '+ str(x) + ' personas por delante')
+    pass 
 
 def dequeue():
+    send(queue.dequeue() + ' Ven a comer')
     pass
 
 def save():
@@ -42,6 +47,12 @@ What would you like to do (type a number and press Enter)?
     # add your options here using conditionals (if)
     if option == 3:
         print_queue()
+    elif option == 1:
+        print('Coloque su nombre')
+        nombre = input()
+        add(nombre)    
+    elif option ==2:
+        dequeue()
     elif option == 6:
         print("Bye bye!")
         stop = True
