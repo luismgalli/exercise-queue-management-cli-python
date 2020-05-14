@@ -15,8 +15,15 @@ class Queue:
         pass
     def dequeue(self):
         comensal = self._queue[0]
-        #print(comensal)
-        self._queue.pop(0)
+        if self._mode == 'FIFO':
+            comensal = self._queue[0]
+            #print(comensal)
+            self._queue.pop(0)
+        elif self._mode == 'LIFO':
+            comensal = self._queue[-1]
+            self._queue.pop(-1)
+        else:
+            print('error')
         return comensal 
     def get_queue(self):
         return self._queue

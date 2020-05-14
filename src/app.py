@@ -2,10 +2,10 @@ import json
 from DataStructures import Queue
 from sms import send
 
-lista = ['pedro', 'luis', 'maria']
+lista = []
 # there queue has to be declared globally (outside any other function)
 # that way all methods have access to it
-queue = Queue(mode="FIFO",current_queue= lista)
+queue = Queue(mode="LIFO",current_queue= lista)
     
 def print_queue():
     # you must print on the console the entire queue list
@@ -23,9 +23,16 @@ def dequeue():
     pass
 
 def save():
+    file = open('lista.json','w+')
+    file.write(json.dumps(queue.get_queue()))
+    file.close()
     pass
 
-def load():
+def load(ruta):
+    with open(ruta) as contenido:
+        resultado = json.load(contenido)
+        queue._queue = resultado
+    print(resultado)
     pass 
         
     
@@ -53,6 +60,11 @@ What would you like to do (type a number and press Enter)?
         add(nombre)    
     elif option ==2:
         dequeue()
+    elif option ==4:
+        save()
+    elif option ==5:
+        ruta = 'lista.json'
+        load(ruta)
     elif option == 6:
         print("Bye bye!")
         stop = True
